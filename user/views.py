@@ -20,7 +20,7 @@ def userLogin(request):
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
                 login(request, user)
-                return redirect('/dashboard')
+                return redirect('/')
     else:
         form = CustomAuthenticationForm()
     return render(request, 'login.html', {'form': form})
