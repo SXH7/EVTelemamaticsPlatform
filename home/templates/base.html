@@ -1,14 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+
+{% load static %}
+<html>
 <head>
     <title>{% block title %}ergregreggeegeg{% endblock %}</title>
-    <!--css-->>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <div class="sidenav">
+    <div class="side-panel">
         <a href="/sample">Sample Text</a>
     </div>
-    <div id="'content", name="content", class="main">
+    <div class="main-content">
         {% block content %}
         {% endblock %}
     </div>
