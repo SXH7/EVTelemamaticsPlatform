@@ -5,14 +5,18 @@
 <table border="1">
     <thead>
         <tr>
-            <th>Data: X</th>
+            <th>Field1</th>
+            <th>Field2</th>
+            <th>Field3</th>
 
         </tr>
     </thead>
     <tbody>
         {% for entry in data %}
         <tr>
-            <td> {{ entry.x }}</td>
+            <td> {{ entry.field1 }}</td>
+            <td> {{ entry.field2 }}</td>
+            <td> {{ entry.field3 }}</td>
         </tr>
         {% endfor %}
     </tbody>

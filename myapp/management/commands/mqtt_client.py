@@ -14,11 +14,14 @@ class Command(BaseCommand):
             self.stdout.write(f'Message received: {msg.payload.decode()}')
             # Process and save the message to database
             data = msg.payload.decode()
-            y = data[0]
-            DataDump.objects.create(x=y)
+            y = data.split(', ')
+            DataDump.objects.create(field1=y[0], field2=int(y[1]), field3=y[2])
 
         client.on_connect = on_connect
         client.on_message = on_message
 
         client.connect('127.0.0.1', 1883, 60)
         client.loop_forever()
+
+
+
