@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import DeviceForm
+from .views import registerDevice
 
 urlpatterns = [
-    path('register/', DeviceForm, name='deviceRegister'),
+    path('register/', registerDevice, name='deviceRegister'),
 ]

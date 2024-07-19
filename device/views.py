@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect
-from .form import DeviceForm
+from .forms import DeviceForm
 
 # Create your views here.
 def registerDevice(request):
+
+    print("Request method:", request.method)
     if request.method == 'POST':
-        form = DeviceForm(request.POST)
+        form = DeviceForm(request.POST, request.FILES)
+        print("POST data:", request.POST)
         if form.is_valid():
-            device = form.save()
-            return redirect('/device/register')
+            form.save()
+            return redirect('/')
     else:
         form = DeviceForm()
     return render(request, 'deviceRegister.html', {'form': form})
