@@ -16,7 +16,7 @@ class Device(models.Model):
         ('NMC', 'NMC'),
     ]
 
-    device_id = models.CharField(max_length=50)
+    device_id = models.CharField(max_length=50, primary_key=True)
     device_creationTime = models.DateTimeField(auto_now_add=True)
     device_voltage = models.IntegerField(choices=VOLTAGE, null=True)  
     device_current = models.IntegerField()
