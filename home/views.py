@@ -16,3 +16,10 @@ def raw(request):
         return render(request, 'raw.html', {'data': data})
     else:
         return redirect('login')
+
+def assets(request):
+
+    if request.user.is_authenticated:
+        return render(request, 'assets.html')
+    else:
+        return redirect('login')
