@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import DeviceForm
+from rest_framework import generics
+from .models import Device
+from .serializers import serializer
 
 # Create your views here.
 def registerDevice(request):
@@ -14,3 +17,7 @@ def registerDevice(request):
     else:
         form = DeviceForm()
     return render(request, 'deviceRegister.html', {'form': form})
+
+class resttest(generics.ListCreateAPIView):
+    queryset = Device.objects.all()
+    serializer_class = serializer
