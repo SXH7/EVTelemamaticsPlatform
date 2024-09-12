@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
-from .serializers import serializer
+from .serializers import customerSerializer
 from .models import Customer
-from rest_framework import generics
+from django.http import HttpResponse
+
+from rest_framework import generics, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 
 def register(request):
     if request.method == 'POST':
@@ -32,9 +37,21 @@ def userLogin(request):
 def customerList(request):
     customers = Customer.objects.all()
     print(customers)
+    print(customers)
     return render(request, 'customers.html', {"customers":customers})
 
 
 class customerFormAPI(generics.ListCreateAPIView):
     queryset = Customer.objects.all()
-    serializer_class = serializer
+    serializer_class = customerSerializer
+
+def customerFormAPIView(request):
+    if request.method == "GET":
+        return render(request, 'customer_form.html')
+    elif request.method == 'POST':
+        serializer = customerSerializer(data = request.POST)
+        if serializer.is_valid():
+            serializer.save()
+            return redirect('customerList')
+        else:
+            return render(request, 'customer_form.html', {'errors': serializer.errors})

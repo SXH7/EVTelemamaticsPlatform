@@ -1,9 +1,9 @@
 from django.urls import path
-from .views import register, userLogin, customerList, customerFormAPI
+from .views import register, userLogin, customerList, customerFormAPI, customerFormAPIView
 
 urlpatterns = [
     path('register/', register, name='register'),
     path('login/', userLogin, name='login'),
     path('customers/', customerList, name='customerList'),
-    path('create', customerFormAPI.as_view(), name='CustoemrFORm')
+    path('customers/create', customerFormAPIView, name='customerForm')
 ]

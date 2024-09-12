@@ -2,39 +2,7 @@
 {% load static %}
 {% block content %}
 
-<div class="container">
-    <h1>Customers</h1>
-    <button class="button open-modal">Create New Customer</button>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Created Time</th>
-                <th>Email</th>
-                <th>State</th>
-                <th>City</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for customer in customers %}
-                <tr>
-                    <td>{{ customer.customer_name }}</td>
-                    <td>{{ customer.customer_creationTime }}</td>
-                    <td>{{ customer.customer_email }}</td>
-                    <td>{{ customer.customer_state }}</td>
-                    <td>{{ customer.customer_city }}</td>
-                    <td>
-                        <button>Manage Customer Users</button>
-                        <button>Manage Customer Assets</button>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    <dialog class = 'modal' id="modal">
-        <h1>Create a New Customer</h1>
+<h1>Create a New Customer</h1>
     <form method="post" action="{% url 'customerForm' %}">
         {% csrf_token %}
         
@@ -77,11 +45,7 @@
         <label for="customer_email">Customer Email:</label>
         <input type="email" id="customer_email" name="customer_email" required><br>
 
-        <button class="button submit" type="submit">Submit</button>
+        <button type="submit">Submit</button>
     </form>
-        <button class="button close-modal">Close</button>
-    </dialog>
-    <script src="{% static 'js/script.js' %}"></script> 
-</div>
 
 {% endblock %}
