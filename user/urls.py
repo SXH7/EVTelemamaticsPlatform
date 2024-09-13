@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import register, userLogin, customerList, customerFormAPI, customerFormAPIView
+from .views import register, userLogin, customerList, customerFormAPIView
 
 urlpatterns = [
     path('register/', register, name='register'),

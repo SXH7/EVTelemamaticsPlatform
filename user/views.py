@@ -40,11 +40,6 @@ def customerList(request):
     print(customers)
     return render(request, 'customers.html', {"customers":customers})
 
-
-class customerFormAPI(generics.ListCreateAPIView):
-    queryset = Customer.objects.all()
-    serializer_class = customerSerializer
-
 def customerFormAPIView(request):
     if request.method == "GET":
         return render(request, 'customer_form.html')
