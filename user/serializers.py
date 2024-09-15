@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Customer
+from .models import Customer, CustomerUser
 
 class customerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,3 +14,9 @@ class customerSerializer(serializers.ModelSerializer):
     def validate_customer_phone(self, value):
         if len(str(value)) != 10:
             raise serializers.ValidationError("Phone number must be 10 digits.")
+
+
+class cuserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomerUser
+        exclude = ('cuser_superuser',)

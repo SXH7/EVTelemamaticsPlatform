@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
-from .serializers import customerSerializer
+from .serializers import customerSerializer, cuserSerializer
 from .models import Customer
 from django.http import HttpResponse
 
@@ -50,3 +50,14 @@ def customerFormAPIView(request):
             return redirect('customerList')
         else:
             return render(request, 'customer_form.html', {'errors': serializer.errors})
+
+def cuserFormAPIView(request):
+    if request.method == "GET":
+        return render(request, 'cuser_form.html')
+    elif request.method == 'POST':
+        serializer = cuserSerializer(data = request.POST)
+        if serializer.is_valid():
+            serializer.save()
+            return redirect('customerList')
+        else:
+            return render(request, 'cuser_form.html', {'errors': serializer.errors})
