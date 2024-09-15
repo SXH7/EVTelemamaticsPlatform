@@ -55,6 +55,8 @@ def cuserFormAPIView(request):
     if request.method == "GET":
         return render(request, 'cuser_form.html')
     elif request.method == 'POST':
+        # check data by printing it and see if you can auto create cuser by that
+        # print(request.POST)
         serializer = cuserSerializer(data = request.POST)
         if serializer.is_valid():
             serializer.save()
