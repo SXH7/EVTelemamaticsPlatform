@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
-from .models import Customer
+from .models import Customer, CustomerUser
 
 User = get_user_model()
 
@@ -19,3 +19,8 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = '__all__'
+
+class CustomerUserForm(forms.ModelForm):
+    class Meta:
+        model = CustomerUser
+        exclude = ('cuser_superuser',)
