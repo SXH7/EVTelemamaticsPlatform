@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Customer
+from .models import Customer, User
 
 class customerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -16,3 +16,9 @@ class customerSerializer(serializers.ModelSerializer):
         if len(str(value)) != 10:
             raise serializers.ValidationError("Phone number must be 10 digits.")
         return value
+
+class cuserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
+

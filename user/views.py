@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import Group, Permission
 from .forms import CustomUserCreationForm, CustomAuthenticationForm
-from .serializers import customerSerializer
+from .serializers import customerSerializer, cuserSerializer
 from .models import Customer
 from django.http import HttpResponse, HttpResponseForbidden
 
@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 group_tenant_admin = Group.objects.get(name='Tenant Admin')
+group_customer_user = Group.objects.get(name='Customer User')
 
 def register(request):
     if request.method == 'POST':
@@ -58,3 +59,18 @@ def customerFormAPIView(request):
             return redirect('customerList')
         else:
             return render(request, 'customer_form.html', {'errors': serializer.errors})
+
+def cuserFormAPIView(request):
+    if not request.user.groups.filter(name='Tenant Admin').exists():
+        return HttpResponseForbidden("You don't have permission to create a customer.")
+    
+    if request.method == "GET":
+        return render(request, 'cuser_form.html')
+    elif request.method == 'POST':
+        serializer = cuserSerializer(data = request.POST)
+        if serializer.is_valid():
+            user = serializer.save()
+            group_customer_user.user_set.add(user)
+            return redirect('customerList')
+        else:
+            return render(request, 'cuser_form.html', {'errors': serializer.errors})
